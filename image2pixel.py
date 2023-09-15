@@ -87,3 +87,72 @@ with open('Arduino_GFX.txt', 'w') as archivo_salida:
 
 print("El archivo de salida 'Arduino_GFX.txt' ha sido generado.")
 
+
+
+
+
+
+# Diccionario para mapear opciones del usuario a colores en inglés
+colores_ingles = {
+    '1': 'BLACK',
+    '2': 'NAVY',
+    '3': 'DARKGREEN',
+    '4': 'DARKCYAN',
+    '5': 'MAROON',
+    '6': 'PURPLE',
+    '7': 'OLIVE',
+    '8': 'LIGHTGREY ',
+    '9': 'DARKGREY',
+    '10': 'BLUE',
+    '11': 'GREEN',
+    '12': 'CYAN',
+    '13': 'RED',
+    '14': 'MAGENTA',
+    '15': 'YELLOW',
+    '16': 'ORANGE',
+    '17': 'GREENYELLOW',
+    '18': 'PINK',
+
+    # Agrega más colores según sea necesario
+}
+
+# Solicitar al usuario que seleccione un color para reemplazar "WHITE"
+print("Selecciona un color para reemplazar 'WHITE':")
+for opcion, color in colores_ingles.items():
+    print(f"{opcion} - {color}")
+
+opcion_color_reemplazo = input("Ingresa el número del color que deseas utilizar (por ejemplo, 1 para negro): ")
+
+# Verificar si la opción de color ingresada es válida
+if opcion_color_reemplazo in colores_ingles:
+    color_reemplazo = colores_ingles[opcion_color_reemplazo]
+else:
+    print("Opción de color no válida. Se utilizará el color predeterminado (WHITE).")
+    color_reemplazo = 'WHITE'  # Color predeterminado si la opción no es válida
+
+# Nombre del archivo de entrada y archivo de salida
+archivo_entrada = 'Arduino_GFX.txt'
+archivo_salida = 'Arduino_GFX_color.txt'
+
+# Abrir el archivo de entrada para lectura
+with open(archivo_entrada, 'r') as archivo_entrada:
+    lineas = archivo_entrada.readlines()
+
+# Lista para almacenar las salidas
+salidas = []
+
+# Iterar sobre cada línea del archivo de entrada
+for linea in lineas:
+    # Reemplazar "WHITE" por el color seleccionado
+    linea_modificada = linea.replace('WHITE', color_reemplazo)
+    salidas.append(linea_modificada)
+
+# Abrir el archivo de salida para escritura
+with open(archivo_salida, 'w') as archivo_salida:
+    # Escribir las salidas en el archivo de salida
+    for salida in salidas:
+        archivo_salida.write(salida)
+
+print(f"El archivo de salida '{archivo_salida}' ha sido generado con el color '{color_reemplazo}'.")
+
+
